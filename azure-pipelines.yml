@@ -15,7 +15,8 @@ steps:
   inputs:
     SonarCloud: 'rabo'
     organization: 'springbootvenkat'
-    scannerMode: 'Other'
+    scannerMode: 'CLI'
+    configMode: 'file'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
@@ -37,13 +38,12 @@ steps:
     SourceFolder: 'target'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-    
-- task: SonarCloudAnalyze@1
-- task: SonarCloudPublish@1
-  inputs:
-    pollingTimeoutSec: '300'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
-    publishLocation: 'Container'
+    publishLocation: 'Container'    
+- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
