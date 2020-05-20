@@ -26,5 +26,6 @@ steps:
   inputs:
     containerRegistry: 'venkatesh07_Docker'
     repository: 'venkatesh07'
-    command: 'buildAndPush'
+    command: 'push'
     Dockerfile: '**/Dockerfile'
+
