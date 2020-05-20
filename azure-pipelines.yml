@@ -11,26 +11,10 @@ pool:
 
 steps:
 
-- task: Maven@3
+- task: Docker@2
   inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
-
-- script: |
-    echo Build docker image
-    docker build -t $username.azurecr.io/$(imageName):$(Build.BuildNumber) .
-    echo Login to docker repository
-    docker login -u $username -p $password $username.azurecr.io
-    echo Push docker image
-    docker push $username.azurecr.io/$(imageName):$(Build.BuildNumber)
-  displayName: 'Build and Push Docker Image'
-  env:
-    username: $(acrUsername)
-    password: $(acrPassword)
-
+    containerRegistry: 'venkatesh07_Docker'
+    repository: 'test'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    buildContext: '*.jar'
