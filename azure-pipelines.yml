@@ -16,10 +16,21 @@ steps:
   inputs:
     command: login
     containerRegistry: 'venkatesh07_Docker'
-- task: Docker@2
+
+- task: Maven@3
   inputs:
-    containerRegistry: 'venkatesh07_Docker'
-    repository: 'test'
-    command: 'buildAndPush'    
-    buildContext: '**'
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package -Dmaven.test.skip=true'
+- task: Docker@2
+  displayName: Build and Push
+  inputs:
+    command: buildAndPush
+    repository: test
+    tags: latest
 
