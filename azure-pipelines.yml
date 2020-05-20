@@ -20,7 +20,6 @@ steps:
   inputs:
     containerRegistry: 'venkatesh07_Docker'
     repository: 'test'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    command: 'buildAndPush'    
     buildContext: '**'
 
