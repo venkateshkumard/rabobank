@@ -12,9 +12,15 @@ pool:
 steps:
 
 - task: Docker@2
+  displayName: Login to ACR
+  inputs:
+    command: login
+    containerRegistry: 'venkatesh07_Docker'
+- task: Docker@2
   inputs:
     containerRegistry: 'venkatesh07_Docker'
     repository: 'test'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
-    buildContext: '*.jar'
+    buildContext: '**'
+
