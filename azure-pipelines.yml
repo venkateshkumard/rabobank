@@ -22,10 +22,15 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: Docker@2
-  inputs:
-    containerRegistry: 'venkatesh07_Docker'
-    repository: 'venkatesh07'
-    command: 'push'
-    Dockerfile: '**/Dockerfile'
+- script: |
+    echo Build docker image
+    docker build -t $username.azurecr.io/$(imageName):$(Build.BuildNumber) .
+    echo Login to docker repository
+    docker login -u $username -p $password $username.azurecr.io
+    echo Push docker image
+    docker push $username.azurecr.io/$(imageName):$(Build.BuildNumber)
+  displayName: 'Build and Push Docker Image'
+  env:
+    username: $(acrUsername)
+    password: $(acrPassword)
 
