@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: "venkateshkumar007"
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: "venkateshkumar007"
+    spec:
+      containers:
+        - name: "venkateshkumar007"
+          image: "venkat007.azurecr.io/venkateshkumar007"
+          ports:
+          - containerPort: 80
