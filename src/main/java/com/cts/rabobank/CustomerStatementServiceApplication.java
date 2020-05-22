@@ -31,6 +31,6 @@ public class CustomerStatementServiceApplication {
     
     @GetMapping(value = "/")
     public String index() {
-        return "Welcome Venkat, Sample application demo deployed via CI-CD Azure pipeline";
+        return "Welcome Venkat, Rabo application demo deployed via CI-CD Azure pipeline";
     }
 }
