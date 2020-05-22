@@ -8,9 +8,12 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.web.bind.annotation.RestController;
+
 
 @SpringBootApplication
 @EnableSwagger2
+@RestController
 public class CustomerStatementServiceApplication {
 
     public static void main(String[] args) {
@@ -24,5 +27,10 @@ public class CustomerStatementServiceApplication {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build();
+    }
+    
+    @GetMapping(value = "/")
+    public String index() {
+        return "Welcome Venkat, Sample application demo deployed via CI-CD Azure pipeline";
     }
 }
