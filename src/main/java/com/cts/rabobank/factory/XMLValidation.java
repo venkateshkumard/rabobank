@@ -27,7 +27,7 @@ public class XMLValidation implements FileValidation {
 
         }catch (Exception e){
             log.error("XMLValidation::{}",e.getMessage());
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new RecordParseException(e.getMessage());
 
         }
